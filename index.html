@@ -66,17 +66,17 @@
     <div class="tab-content">
         <div id="con-tintuc" class="tab-pane active" role="tabpanel">
             <div id="rss-tintuc" style="padding: 10px; overflow-y: auto; height: 350px; font-size: 12px;">
-                Đang tải tin tức...
+                <div class="loader">Đang tải tin tức...</div>
             </div>
         </div>
         <div id="con-sukien" class="tab-pane" role="tabpanel">
             <div id="rss-sukien" style="padding: 10px; overflow-y: auto; height: 350px; font-size: 12px;">
-                Đang tải sự kiện...
+                <div class="loader">Đang tải sự kiện...</div>
             </div>
         </div>
         <div id="con-capnhat" class="tab-pane" role="tabpanel">
             <div id="rss-capnhat" style="padding: 10px; overflow-y: auto; height: 350px; font-size: 12px;">
-                Đang tải cập nhật...
+                <div class="loader">Đang tải cập nhật...</div>
             </div>
         </div>
     </div>
@@ -85,94 +85,99 @@
 <script>
 // Cấu hình RSS Feed
 const rssConfig = {
-    blogUrl: 'https://news.trutienmyth.net', // Thay bằng URL blog của bạn
-    maxPosts: 5, // Số bài viết tối đa mỗi tab
+    baseUrl: 'https://news.trutienmyth.net',
+    maxPosts: 10, // Số bài viết tối đa hiển thị
     labels: {
-        'tintuc': 'tintuc',    // Nhãn RSS cho tab Tin tức
-        'sukien': 'sukien',  // Nhãn RSS cho tab Sự kiện
-        'capnhat': 'capnhat' // Nhãn RSS cho tab Cập nhật
+        'tintuc': 'tintuc',
+        'sukien': 'sukien',
+        'capnhat': 'capnhat'
     }
 };
 
-// Hàm lấy dữ liệu từ RSS Feed
+// Hàm lấy dữ liệu RSS
 async function fetchRSSFeed(label) {
     try {
-        let rssUrl = `${rssConfig.blogUrl}/feeds/posts/default`;
-        
-        if (label) {
-            rssUrl += `/-/${encodeURIComponent(label)}`;
-        }
-        
-        // Sử dụng CORS proxy để tránh lỗi
+        const rssUrl = `${rssConfig.baseUrl}/feeds/posts/default/-/${label}?alt=rss`;
         const proxyUrl = 'https://api.allorigins.win/get?url=';
         const response = await fetch(`${proxyUrl}${encodeURIComponent(rssUrl)}`);
         const data = await response.json();
         
         if (data.contents) {
             const parser = new DOMParser();
-            const xmlDoc = parser.parseFromString(data.contents, "text/xml");
-            const items = xmlDoc.querySelectorAll('entry');
+            const xml = parser.parseFromString(data.contents, "text/xml");
+            const items = xml.querySelectorAll('item');
             
-            const posts = [];
-            const maxItems = Math.min(items.length, rssConfig.maxPosts);
-            
-            for (let i = 0; i < maxItems; i++) {
-                const item = items[i];
-                const title = item.querySelector('title').textContent;
-                const pubDate = new Date(item.querySelector('published').textContent);
-                const link = item.querySelector('link[rel="alternate"]').getAttribute('href');
-                
-                posts.push({
-                    title: title,
-                    date: pubDate.toLocaleDateString('vi-VN'),
-                    url: link
-                });
-            }
-            
-            return posts;
+            return Array.from(items).slice(0, rssConfig.maxPosts).map(item => ({
+                title: item.querySelector('title').textContent,
+                date: new Date(item.querySelector('pubDate').textContent).toLocaleDateString('vi-VN'),
+                url: item.querySelector('link').textContent
+            }));
         }
         return [];
     } catch (error) {
-        console.error('Lỗi khi lấy RSS Feed:', error);
+        console.error(`Lỗi khi lấy RSS ${label}:`, error);
         return [];
     }
 }
 
-// Hàm hiển thị bài viết lên tab
-function displayRSSPosts(posts, tabId) {
-    const container = document.getElementById(`rss-${tabId}`);
+// Hàm hiển thị bài viết
+function displayPosts(posts, containerId) {
+    const container = document.getElementById(`rss-${containerId}`);
     if (!container) return;
     
     if (posts.length === 0) {
-        container.innerHTML = '<p>Không có bài viết nào.</p>';
+        container.innerHTML = '<div class="no-posts">Không có bài viết nào</div>';
         return;
     }
     
-    let html = '';
-    posts.forEach(post => {
-        html += `
-            <div style="margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px dashed #eee;">
-                <a href="${post.url}" target="_blank" style="color: #333; text-decoration: none; font-weight: 500;">
-                    ${post.title}
-                </a>
-                <p style="color: #888; margin: 5px 0 0; font-size: 11px;">${post.date}</p>
-            </div>
-        `;
-    });
-    
-    container.innerHTML = html;
+    container.innerHTML = posts.map(post => `
+        <div class="post-item">
+            <a href="${post.url}" target="_blank" class="post-title">${post.title}</a>
+            <div class="post-date">${post.date}</div>
+        </div>
+    `).join('');
 }
 
-// Tải nội dung cho tất cả các tab
-async function loadAllRSSContent() {
+// Tải tất cả nội dung
+async function loadAllFeeds() {
     for (const [tabId, label] of Object.entries(rssConfig.labels)) {
         const posts = await fetchRSSFeed(label);
-        displayRSSPosts(posts, tabId);
+        displayPosts(posts, tabId);
     }
 }
 
-// Gọi hàm khi trang tải xong
-document.addEventListener('DOMContentLoaded', loadAllRSSContent);
+// Thêm CSS
+const style = document.createElement('style');
+style.textContent = `
+    .post-item {
+        padding: 8px 0;
+        border-bottom: 1px dashed #eee;
+    }
+    .post-title {
+        color: #333;
+        text-decoration: none;
+        font-weight: 500;
+        display: block;
+        margin-bottom: 3px;
+        transition: color 0.2s;
+    }
+    .post-title:hover {
+        color: #0066cc;
+    }
+    .post-date {
+        color: #888;
+        font-size: 11px;
+    }
+    .loader, .no-posts {
+        text-align: center;
+        padding: 20px;
+        color: #666;
+    }
+`;
+document.head.appendChild(style);
+
+// Khởi chạy
+document.addEventListener('DOMContentLoaded', loadAllFeeds);
 </script></div>
     <div class="d-flex justify-content-end" style="transform: translateX(-130px) translateY(75px);height: auto;"><a class="btn btn-primary" role="button" href="#" style="background: url(&quot;assets/img/download.png&quot;);width: 295px;height: 119px;border-style: none;box-shadow: 0px 0px;"></a></div>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
