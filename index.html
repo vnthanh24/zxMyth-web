@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Tru Tiên Landing</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body style="background: url(&quot;assets/img/head-bg.jpg&quot;) top / auto no-repeat, #0e121d;">
+    <div><div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">    
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<nav class="navbar glass-navbar navbar-expand-lg justify-content-center">
+  <div class="container text-center">
+    <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarGlass">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-center" id="navbarGlass">
+      <ul class="navbar-nav d-flex justify-content-center flex-wrap gap-2">
+        <li class="nav-item">
+          <a class="nav-link text-white nav-glass-link" href="https://trutienmyth.net">
+            <i class="bi bi-house-door-fill me-2"></i>Trang chủ
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white nav-glass-link" href="https://news.trutienmyth.net">
+            <i class="bi bi-newspaper me-2"></i>Tin tức & sự kiện
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white nav-glass-link" href="https://facebook.com/groups/zxmyth">
+            <i class="bi bi-facebook me-2"></i>FB Group
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white nav-glass-link" href="https://discord.gg/P2a9NC6UpZ">
+            <i class="bi bi-discord me-2"></i>Discord
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white nav-glass-link" href="https://id.trutienmyth.net/index/register">
+            <i class="bi bi-pencil-square me-2"></i>Đăng ký
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white nav-glass-link" href="https://id.trutienmyth.net/index/login">
+            <i class="bi bi-box-arrow-in-right me-2"></i>Đăng nhập
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+</div></div>
+    <div style="height: 130px;"></div>
+    <div class="d-flex justify-content-end align-items-start" style="height: 350px;transform: translateX(-94px) translateY(-82px);"><div style="background: rgba(0,0,0,0.13);width: 300px;height: 400px;filter: blur(0px);backdrop-filter: blur(9px);-webkit-backdrop-filter: blur(9px);transform: translateX(-34px) translateY(84px);">
+    <ul class="nav nav-underline nav-justified" role="tablist" style="background: rgb(255,255,255);height: 50px;">
+        <li id="tintuc" class="nav-item" role="presentation"><a id="link-tintuc" class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-1" style="font-size: 14px;">Tin tức</a></li>
+        <li id="sukien" class="nav-item" role="presentation" style="font-size: 14px;"><a id="link-sukien" class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-2" style="font-size: 14px;">Sự kiện</a></li>
+        <li id="capnhat" class="nav-item" role="presentation" style="font-size: 14px;"><a id="link-capnhat" class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-3" style="font-size: 14px;">Cập nhật</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="con-tintuc" class="tab-pane active" role="tabpanel">
+            <div id="rss-tintuc" style="padding: 10px; overflow-y: auto; height: 350px; font-size: 12px;">
+                Đang tải tin tức...
+            </div>
+        </div>
+        <div id="con-sukien" class="tab-pane" role="tabpanel">
+            <div id="rss-sukien" style="padding: 10px; overflow-y: auto; height: 350px; font-size: 12px;">
+                Đang tải sự kiện...
+            </div>
+        </div>
+        <div id="con-capnhat" class="tab-pane" role="tabpanel">
+            <div id="rss-capnhat" style="padding: 10px; overflow-y: auto; height: 350px; font-size: 12px;">
+                Đang tải cập nhật...
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Cấu hình RSS Feed
+const rssConfig = {
+    blogUrl: 'https://news.trutienmyth.net', // Thay bằng URL blog của bạn
+    maxPosts: 5, // Số bài viết tối đa mỗi tab
+    labels: {
+        'tintuc': 'tintuc',    // Nhãn RSS cho tab Tin tức
+        'sukien': 'sukien',  // Nhãn RSS cho tab Sự kiện
+        'capnhat': 'capnhat' // Nhãn RSS cho tab Cập nhật
+    }
+};
+
+// Hàm lấy dữ liệu từ RSS Feed
+async function fetchRSSFeed(label) {
+    try {
+        let rssUrl = `${rssConfig.blogUrl}/feeds/posts/default`;
+        
+        if (label) {
+            rssUrl += `/-/${encodeURIComponent(label)}`;
+        }
+        
+        // Sử dụng CORS proxy để tránh lỗi
+        const proxyUrl = 'https://api.allorigins.win/get?url=';
+        const response = await fetch(`${proxyUrl}${encodeURIComponent(rssUrl)}`);
+        const data = await response.json();
+        
+        if (data.contents) {
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(data.contents, "text/xml");
+            const items = xmlDoc.querySelectorAll('entry');
+            
+            const posts = [];
+            const maxItems = Math.min(items.length, rssConfig.maxPosts);
+            
+            for (let i = 0; i < maxItems; i++) {
+                const item = items[i];
+                const title = item.querySelector('title').textContent;
+                const pubDate = new Date(item.querySelector('published').textContent);
+                const link = item.querySelector('link[rel="alternate"]').getAttribute('href');
+                
+                posts.push({
+                    title: title,
+                    date: pubDate.toLocaleDateString('vi-VN'),
+                    url: link
+                });
+            }
+            
+            return posts;
+        }
+        return [];
+    } catch (error) {
+        console.error('Lỗi khi lấy RSS Feed:', error);
+        return [];
+    }
+}
+
+// Hàm hiển thị bài viết lên tab
+function displayRSSPosts(posts, tabId) {
+    const container = document.getElementById(`rss-${tabId}`);
+    if (!container) return;
+    
+    if (posts.length === 0) {
+        container.innerHTML = '<p>Không có bài viết nào.</p>';
+        return;
+    }
+    
+    let html = '';
+    posts.forEach(post => {
+        html += `
+            <div style="margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px dashed #eee;">
+                <a href="${post.url}" target="_blank" style="color: #333; text-decoration: none; font-weight: 500;">
+                    ${post.title}
+                </a>
+                <p style="color: #888; margin: 5px 0 0; font-size: 11px;">${post.date}</p>
+            </div>
+        `;
+    });
+    
+    container.innerHTML = html;
+}
+
+// Tải nội dung cho tất cả các tab
+async function loadAllRSSContent() {
+    for (const [tabId, label] of Object.entries(rssConfig.labels)) {
+        const posts = await fetchRSSFeed(label);
+        displayRSSPosts(posts, tabId);
+    }
+}
+
+// Gọi hàm khi trang tải xong
+document.addEventListener('DOMContentLoaded', loadAllRSSContent);
+</script></div>
+    <div class="d-flex justify-content-end" style="transform: translateX(-130px) translateY(75px);height: auto;"><a class="btn btn-primary" role="button" href="#" style="background: url(&quot;assets/img/download.png&quot;);width: 295px;height: 119px;border-style: none;box-shadow: 0px 0px;"></a></div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
