@@ -6,11 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Tru Tiên Landing</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <link rel="stylesheet" href="assets/css/Footer-Clean-icons.css">
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
-<body style="background: url(&quot;assets/img/head-bg.jpg&quot;) top / auto no-repeat, #0e121d;">
-    <div><div>
+<body style="background: url(&quot;assets/img/head-bg.jpg&quot;) top / auto no-repeat, #0e121d;height: auto;">
+    <main style="height: auto;">
+        <div><div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">    
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <nav class="navbar glass-navbar navbar-expand-lg justify-content-center">
@@ -56,26 +59,32 @@
 </nav>
 
 </div></div>
-    <div style="height: 130px;"></div>
-    <div class="d-flex justify-content-end align-items-start" style="height: 350px;transform: translateX(-94px) translateY(-82px);"><div style="background: rgba(0,0,0,0.13);width: 300px;height: 400px;filter: blur(0px);backdrop-filter: blur(9px);-webkit-backdrop-filter: blur(9px);transform: translateX(-34px) translateY(84px);">
+        <div style="height: 130px;"><img class="swing animated" src="assets/img/logo.webp" width="171" height="136" style="margin-left: 40px;margin-top: 16px;" loading="eager"></div>
+        <div class="d-flex justify-content-end align-items-start" style="height: 350px;transform: translateX(-94px) translateY(-82px);"><div style="background: rgba(0,0,0,0.13);width: 300px;height: 400px;filter: blur(0px);backdrop-filter: blur(9px);-webkit-backdrop-filter: blur(9px);transform: translateX(-34px) translateY(84px);">
     <ul class="nav nav-underline nav-justified" role="tablist" style="background: rgb(255,255,255);height: 50px;">
-        <li id="tintuc" class="nav-item" role="presentation"><a id="link-tintuc" class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-1" style="font-size: 14px;">Tin tức</a></li>
-        <li id="sukien" class="nav-item" role="presentation" style="font-size: 14px;"><a id="link-sukien" class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-2" style="font-size: 14px;">Sự kiện</a></li>
-        <li id="capnhat" class="nav-item" role="presentation" style="font-size: 14px;"><a id="link-capnhat" class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-3" style="font-size: 14px;">Cập nhật</a></li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" data-bs-toggle="tab" href="#tab-tintuc" style="font-size: 14px;">Tin tức</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" data-bs-toggle="tab" href="#tab-sukien" style="font-size: 14px;">Sự kiện</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" data-bs-toggle="tab" href="#tab-capnhat" style="font-size: 14px;">Cập nhật</a>
+        </li>
     </ul>
     <div class="tab-content">
-        <div id="con-tintuc" class="tab-pane active" role="tabpanel">
-            <div id="rss-tintuc" style="padding: 10px; overflow-y: auto; height: 350px; font-size: 12px;">
+        <div id="tab-tintuc" class="tab-pane active" role="tabpanel">
+            <div id="api-tintuc" class="tab-body">
                 <div class="loader">Đang tải tin tức...</div>
             </div>
         </div>
-        <div id="con-sukien" class="tab-pane" role="tabpanel">
-            <div id="rss-sukien" style="padding: 10px; overflow-y: auto; height: 350px; font-size: 12px;">
+        <div id="tab-sukien" class="tab-pane" role="tabpanel">
+            <div id="api-sukien" class="tab-body">
                 <div class="loader">Đang tải sự kiện...</div>
             </div>
         </div>
-        <div id="con-capnhat" class="tab-pane" role="tabpanel">
-            <div id="rss-capnhat" style="padding: 10px; overflow-y: auto; height: 350px; font-size: 12px;">
+        <div id="tab-capnhat" class="tab-pane" role="tabpanel">
+            <div id="api-capnhat" class="tab-body">
                 <div class="loader">Đang tải cập nhật...</div>
             </div>
         </div>
@@ -83,10 +92,11 @@
 </div>
 
 <script>
-// Cấu hình RSS Feed
-const rssConfig = {
-    baseUrl: 'https://news.trutienmyth.net',
-    maxPosts: 10, // Số bài viết tối đa hiển thị
+// Blogger API config
+const bloggerConfig = {
+    apiKey: 'AIzaSyDzZ2sBM101T0ani6qQj0h1b4k8B6dZ2bU',
+    blogId: '4545197129561134859',
+    maxPosts: 5,
     labels: {
         'tintuc': 'tintuc',
         'sukien': 'sukien',
@@ -94,64 +104,74 @@ const rssConfig = {
     }
 };
 
-// Hàm lấy dữ liệu RSS
-async function fetchRSSFeed(label) {
+// Fetch posts
+async function fetchBloggerPosts(label) {
     try {
-        const rssUrl = `${rssConfig.baseUrl}/feeds/posts/default/-/${label}?alt=rss`;
-        const proxyUrl = 'https://api.allorigins.win/get?url=';
-        const response = await fetch(`${proxyUrl}${encodeURIComponent(rssUrl)}`);
+        let url = `https://www.googleapis.com/blogger/v3/blogs/${bloggerConfig.blogId}/posts?key=${bloggerConfig.apiKey}&maxResults=${bloggerConfig.maxPosts}`;
+        if (label) url += `&labels=${encodeURIComponent(label)}`;
+        const response = await fetch(url);
         const data = await response.json();
-        
-        if (data.contents) {
-            const parser = new DOMParser();
-            const xml = parser.parseFromString(data.contents, "text/xml");
-            const items = xml.querySelectorAll('item');
-            
-            return Array.from(items).slice(0, rssConfig.maxPosts).map(item => ({
-                title: item.querySelector('title').textContent,
-                date: new Date(item.querySelector('pubDate').textContent).toLocaleDateString('vi-VN'),
-                url: item.querySelector('link').textContent
+        if (data.items?.length) {
+            return data.items.map(post => ({
+                title: post.title,
+                date: new Date(post.published).toLocaleDateString('vi-VN'),
+                url: post.url
             }));
         }
         return [];
-    } catch (error) {
-        console.error(`Lỗi khi lấy RSS ${label}:`, error);
+    } catch (err) {
+        console.error("Lỗi API Blogger:", err);
         return [];
     }
 }
 
-// Hàm hiển thị bài viết
+// Hiển thị bài viết
 function displayPosts(posts, containerId) {
-    const container = document.getElementById(`rss-${containerId}`);
+    const container = document.getElementById(`api-${containerId}`);
     if (!container) return;
-    
-    if (posts.length === 0) {
+    if (!posts.length) {
         container.innerHTML = '<div class="no-posts">Không có bài viết nào</div>';
         return;
     }
-    
-    container.innerHTML = posts.map(post => `
-        <div class="post-item">
-            <a href="${post.url}" target="_blank" class="post-title">${post.title}</a>
+
+    container.innerHTML = posts.map((post, index) => `
+        <div class="post-item ${index === 0 ? 'post-latest' : ''}">
+            <a href="${post.url}" target="_blank" class="post-title">${index === 0 ? '🆕 ' : ''}${post.title}</a>
             <div class="post-date">${post.date}</div>
         </div>
     `).join('');
 }
 
-// Tải tất cả nội dung
-async function loadAllFeeds() {
-    for (const [tabId, label] of Object.entries(rssConfig.labels)) {
-        const posts = await fetchRSSFeed(label);
+// Load all tabs
+async function loadAllBloggerContent() {
+    const tabs = bloggerConfig.labels;
+    for (const [tabId, label] of Object.entries(tabs)) {
+        const posts = await fetchBloggerPosts(label);
         displayPosts(posts, tabId);
     }
 }
 
-// Thêm CSS
+// Add CSS
 const style = document.createElement('style');
 style.textContent = `
+    .tab-body {
+        padding: 10px;
+        overflow-y: auto;
+        height: 350px;
+        font-size: 12px;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.3s ease-in-out;
+    }
+    .tab-pane.active .tab-body {
+        opacity: 1;
+        transform: translateY(0);
+    }
     .post-item {
         padding: 8px 0;
         border-bottom: 1px dashed #eee;
+        margin-bottom: 10px;
+        animation: fadeIn 0.3s ease-in-out;
     }
     .post-title {
         color: #333;
@@ -160,6 +180,8 @@ style.textContent = `
         display: block;
         margin-bottom: 3px;
         transition: color 0.2s;
+        font-size: 13px;
+        line-height: 1.4;
     }
     .post-title:hover {
         color: #0066cc;
@@ -172,15 +194,151 @@ style.textContent = `
         text-align: center;
         padding: 20px;
         color: #666;
+        font-size: 12px;
+    }
+    .tab-pane {
+        display: none;
+    }
+    .tab-pane.active {
+        display: block;
+    }
+
+    .post-latest {
+        background: linear-gradient(to right, #fefefe, #f0f8ff);
+        border-left: 3px solid #007bff;
+        animation: fadeSlideIn 0.6s ease-out;
+        padding-left: 8px;
+        border-radius: 4px;
+    }
+
+    @keyframes fadeSlideIn {
+        from {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
     }
 `;
 document.head.appendChild(style);
 
-// Khởi chạy
-document.addEventListener('DOMContentLoaded', loadAllFeeds);
-</script></div>
-    <div class="d-flex justify-content-end" style="transform: translateX(-130px) translateY(75px);height: auto;"><a class="btn btn-primary" role="button" href="#" style="background: url(&quot;assets/img/download.png&quot;);width: 295px;height: 119px;border-style: none;box-shadow: 0px 0px;"></a></div>
+// Hover & click tab
+function activateTab(tabLink) {
+    document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+
+    tabLink.classList.add('active');
+    const target = document.querySelector(tabLink.getAttribute('href'));
+    if (target) target.classList.add('active');
+}
+
+// Init
+document.addEventListener('DOMContentLoaded', () => {
+    loadAllBloggerContent();
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('mouseover', function () {
+            activateTab(this);
+        });
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            activateTab(this);
+        });
+    });
+});
+</script>
+</div>
+        <div class="d-flex justify-content-end" style="transform: translateX(-130px) translateY(75px);height: auto;"><a class="btn btn-primary download-btn" role="button" href="https://google.com.vn"></a>
+
+<style>
+.download-btn {
+    display: inline-block;
+    background: url('assets/img/download.png') no-repeat center center;
+    background-size: cover;
+    width: 295px;
+    height: 119px;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    animation: pulseBlink 1.5s infinite;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Hiệu ứng nhấp nháy */
+@keyframes pulseBlink {
+    0% { opacity: 1; }
+    50% { opacity: 0.85; }
+    100% { opacity: 1; }
+}
+
+/* Hover effect */
+.download-btn:hover {
+    transform: scale(1.03);
+    filter: brightness(1.1);
+    animation: none; /* Dừng nhấp nháy khi hover nếu muốn */
+}
+</style>
+</div>
+    </main>
+    <div class="bottom-100 d-inline"><div>
+    <!-- Footer -->
+<footer class="glass-footer">
+    <div class="footer-content">
+        &copy; 2025 Tru Tiên Classic. All rights reserved.
+    </div>
+</footer>
+
+<style>
+/* Reset nếu cần */
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Đảm bảo nội dung chính co giãn */
+main {
+    flex: 1;
+}
+
+/* Footer glass effect */
+.glass-footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: white;
+    text-align: center;
+    padding: 12px 20px;
+    font-size: 14px;
+    box-shadow: 0 -1px 10px rgba(0,0,0,0.2);
+    z-index: 10;
+}
+
+/* Optional: Content wrapper if needed */
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+</style>
+</div></div>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bs-init.js"></script>
 </body>
 
 </html>
