@@ -1,0 +1,28 @@
+#spacer {
+  height: 200px;
+}
+
+.btn {
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.3s ease;
+}
+
+/* Hoặc Cách 2: border-bottom */
+
+.btn::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 3px;
+  background-color: currentColor;
+  bottom: 0;
+  left: 0;
+  transition: width 0.3s ease-out;
+}
+
+.btn:hover::after {
+  width: 100%;
+}
+

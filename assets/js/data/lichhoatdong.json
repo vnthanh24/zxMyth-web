@@ -1,0 +1,38 @@
+{
+  "thu2": [
+    { "title": "Hoạt động câu cá Hà Dương", "time": "11:00 - 14:00" },
+    { "title": "Thí luyện tổ đội", "time": "20:00 - 21:00" },
+    { "title": "Thí luyện tổ đội", "time": "20:00 - 21:00" },
+    { "title": "Thí luyện tổ đội", "time": "20:00 - 21:00" },
+    { "title": "Thí luyện tổ đội", "time": "20:00 - 21:00" },
+    { "title": "Thí luyện tổ đội", "time": "20:00 - 21:00" },
+    { "title": "Thí luyện tổ đội", "time": "20:00 - 21:00" },
+    { "title": "Thí luyện tổ đội", "time": "20:00 - 21:00" },
+    { "title": "Thí luyện tổ đội", "time": "20:00 - 21:00" },
+    { "title": "Thí luyện tổ đội", "time": "20:00 - 21:00" },
+    { "title": "Thí luyện tổ đội", "time": "20:00 - 21:00" },
+    { "title": "Thí luyện tổ đội", "time": "20:00 - 21:00" },
+    { "title": "Thí luyện tổ đội", "time": "20:00 - 21:00" },
+    { "title": "Thí luyện tổ đội", "time": "20:00 - 21:00" },
+    { "title": "Thí luyện tổ đội", "time": "20:00 - 21:00" },
+    { "title": "Thí luyện tổ đội", "time": "20:00 - 21:00" }
+  ],
+  "thu3": [
+    { "title": "Săn Boss Dã Ngoại", "time": "13:00 - 14:00" }
+  ],
+  "thu4": [
+    { "title": "Tranh bá liên server", "time": "19:00 - 20:00" }
+  ],
+  "thu5": [
+    { "title": "Chiến trường Ảo Cảnh", "time": "20:00 - 21:00" }
+  ],
+  "thu6": [
+    { "title": "Tầm bảo toàn server", "time": "12:00 - 13:00" }
+  ],
+  "thu7": [
+    { "title": "Hoạt động Bang hội", "time": "18:00 - 20:00" }
+  ],
+  "chunhat": [
+    { "title": "Đua top Tu Tiên", "time": "15:00 - 17:00" }
+  ]
+}
