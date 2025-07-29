@@ -24,54 +24,232 @@
     <link rel="stylesheet" href="assets/css/css/css/bss-overrides.css">
     <link rel="stylesheet" href="assets/css/css/css/Footer-Clean-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <style>
-    /* Responsive custom styles */
 
-    /* Navbar responsiveness */
-    .glass-navbar .navbar-nav {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-    }
-    @media (max-width: 991.98px) {
-        .glass-navbar .navbar-nav {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-        .navbar-collapse {
-            background: rgba(0,0,0,0.8);
-            padding: 1rem;
-        }
+<style>
+/* Responsive CSS cho toàn bộ trang */
+.glass-navbar {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 100;
+}
+
+.nav-glass-link {
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    padding: 8px 16px !important;
+}
+
+.nav-glass-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Responsive navbar */
+@media (max-width: 992px) {
+    .navbar-nav {
+        gap: 1px !important;
     }
     .nav-glass-link {
-        font-size: 1rem;
-        padding: 0.5rem 1rem;
-        text-align: center;
+        font-size: 13px;
+        padding: 6px 12px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-glass-link {
+        font-size: 12px;
+        padding: 5px 10px !important;
+    }
+    .navbar-nav {
+        gap: 0 !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .nav-glass-link {
+        font-size: 11px;
+        padding: 4px 8px !important;
+    }
+    .nav-glass-link i {
+        font-size: 10px;
+    }
+}
+
+/* Responsive cho tab content */
+@media (max-width: 768px) {
+    .tab-body {
+        font-size: 11px !important;
+        height: 300px !important;
+    }
+    .post-title {
+        font-size: 12px !important;
+    }
+    .post-date {
+        font-size: 10px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .tab-body {
+        font-size: 10px !important;
+        height: 250px !important;
+        padding: 8px !important;
+    }
+    .post-title {
+        font-size: 11px !important;
+    }
+    .post-date {
+        font-size: 9px !important;
+    }
+}
+</style>
+</head>
+
+<body style="background: url(&quot;assets/img/head-bg.jpg&quot;) top / auto no-repeat, #0e121d;height: auto;">
+    <main>
+        <div><div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">    
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<nav class="navbar glass-navbar navbar-expand-lg justify-content-center">
+  <div class="container text-center">
+    <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarGlass">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-center" id="navbarGlass">
+      <ul class="navbar-nav d-flex justify-content-center flex-wrap gap-2">
+        <li class="nav-item">
+          <a class="nav-link text-white nav-glass-link" href="https://trutienmyth.net">
+            <i class="bi bi-house-door-fill me-2"></i>Trang chủ
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white nav-glass-link" href="https://news.trutienmyth.net">
+            <i class="bi bi-newspaper me-2"></i>Tin tức & sự kiện
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white nav-glass-link" href="https://facebook.com/groups/zxmyth">
+            <i class="bi bi-facebook me-2"></i>FB Group
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white nav-glass-link" href="https://discord.gg/P2a9NC6UpZ">
+            <i class="bi bi-discord me-2"></i>Discord
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white nav-glass-link" href="https://id.trutienmyth.net/index/register">
+            <i class="bi bi-pencil-square me-2"></i>Đăng ký
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white nav-glass-link" href="https://id.trutienmyth.net/index/login">
+            <i class="bi bi-box-arrow-in-right me-2"></i>Đăng nhập
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+</div></div>
+        <div style="height: 130px;transform: translateY(0px);"><img class="swing animated" src="assets/img/logo.webp" width="171" height="136" style="margin-left: 40px;margin-top: 16px;" loading="eager"></div>
+        <div class="d-flex justify-content-end align-items-start" style="height: 350px;transform: translateX(-95px) translateY(-125px);"><div style="background: rgba(0,0,0,0.13);width: 300px;height: 400px;filter: blur(0px);backdrop-filter: blur(9px);-webkit-backdrop-filter: blur(9px);transform: translateX(-34px) translateY(84px);">
+    <ul class="nav nav-underline nav-justified" role="tablist" style="background: rgb(255,255,255);height: 50px;">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" data-bs-toggle="tab" href="#tab-tintuc" style="font-size: 14px;">Tin tức</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" data-bs-toggle="tab" href="#tab-sukien" style="font-size: 14px;">Sự kiện</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" data-bs-toggle="tab" href="#tab-capnhat" style="font-size: 14px;">Cập nhật</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div id="tab-tintuc" class="tab-pane active" role="tabpanel">
+            <div id="api-tintuc" class="tab-body">
+                <div class="loader">Đang tải tin tức...</div>
+            </div>
+        </div>
+        <div id="tab-sukien" class="tab-pane" role="tabpanel">
+            <div id="api-sukien" class="tab-body">
+                <div class="loader">Đang tải sự kiện...</div>
+            </div>
+        </div>
+        <div id="tab-capnhat" class="tab-pane" role="tabpanel">
+            <div id="api-capnhat" class="tab-body">
+                <div class="loader">Đang tải cập nhật...</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Blogger API config
+const bloggerConfig = {
+    apiKey: 'AIzaSyDzZ2sBM101T0ani6qQj0h1b4k8B6dZ2bU',
+    blogId: '4545197129561134859',
+    maxPosts: 5,
+    labels: {
+        'tintuc': 'tintuc',
+        'sukien': 'sukien',
+        'capnhat': 'capnhat'
+    }
+};
+
+// Fetch posts
+async function fetchBloggerPosts(label) {
+    try {
+        let url = `https://www.googleapis.com/blogger/v3/blogs/${bloggerConfig.blogId}/posts?key=${bloggerConfig.apiKey}&maxResults=${bloggerConfig.maxPosts}`;
+        if (label) url += `&labels=${encodeURIComponent(label)}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        if (data.items?.length) {
+            return data.items.map(post => ({
+                title: post.title,
+                date: new Date(post.published).toLocaleDateString('vi-VN'),
+                url: post.url
+            }));
+        }
+        return [];
+    } catch (err) {
+        console.error("Lỗi API Blogger:", err);
+        return [];
+    }
+}
+
+// Hiển thị bài viết
+function displayPosts(posts, containerId) {
+    const container = document.getElementById(`api-${containerId}`);
+    if (!container) return;
+    if (!posts.length) {
+        container.innerHTML = '<div class="no-posts">Không có bài viết nào</div>';
+        return;
     }
 
-    /* Logo responsiveness */
-    .responsive-logo {
-        width: 171px;
-        height: 136px;
-        margin-left: 40px;
-        margin-top: 16px;
-        max-width: 50vw;
-        height: auto;
-    }
-    @media (max-width: 768px) {
-        .responsive-logo {
-            width: 100px;
-            margin-left: 0;
-            margin-top: 8px;
-        }
-    }
-    @media (max-width: 480px) {
-        .responsive-logo {
-            width: 80px;
-        }
-    }
+    container.innerHTML = posts.map((post, index) => `
+        <div class="post-item ${index === 0 ? 'post-latest' : ''}">
+            <a href="${post.url}" target="_blank" class="post-title">${index === 0 ? '🆕 ' : ''}${post.title}</a>
+            <div class="post-date">${post.date}</div>
+        </div>
+    `).join('');
+}
 
-    /* Tab content responsiveness */
+// Load all tabs
+async function loadAllBloggerContent() {
+    const tabs = bloggerConfig.labels;
+    for (const [tabId, label] of Object.entries(tabs)) {
+        const posts = await fetchBloggerPosts(label);
+        displayPosts(posts, tabId);
+    }
+}
+
+// Add CSS
+const style = document.createElement('style');
+style.textContent = `
     .tab-body {
         padding: 10px;
         overflow-y: auto;
@@ -85,284 +263,314 @@
         opacity: 1;
         transform: translateY(0);
     }
-    @media (max-width: 768px) {
-        .tab-body {
-            height: 220px;
-            font-size: 11px;
-        }
+    .post-item {
+        padding: 8px 0;
+        border-bottom: 1px dashed #eee;
+        margin-bottom: 10px;
+        animation: fadeIn 0.3s ease-in-out;
     }
-    @media (max-width: 480px) {
-        .tab-body {
-            height: 140px;
-            font-size: 10px;
-        }
+    .post-title {
+        color: #333;
+        text-decoration: none;
+        font-weight: 500;
+        display: block;
+        margin-bottom: 3px;
+        transition: color 0.2s;
+        font-size: 13px;
+        line-height: 1.4;
     }
-
-    /* Download button responsiveness */
-    .download-btn {
-        display: inline-block;
-        background: url('assets/img/download.png') no-repeat center center;
-        background-size: cover;
-        width: 295px;
-        height: 119px;
-        border: none;
-        border-radius: 0;
-        box-shadow: none;
-        animation: pulseBlink 1.5s infinite;
-        transition: transform 0.3s ease, filter 0.3s ease;
+    .post-title:hover {
+        color: #0066cc;
     }
-    @media (max-width: 768px) {
-        .download-btn {
-            width: 180px;
-            height: 72px;
-        }
+    .post-date {
+        color: #888;
+        font-size: 11px;
     }
-    @media (max-width: 480px) {
-        .download-btn {
-            width: 130px;
-            height: 52px;
-        }
-    }
-    @keyframes pulseBlink {
-        0% { opacity: 1; }
-        50% { opacity: 0.85; }
-        100% { opacity: 1; }
-    }
-    .download-btn:hover {
-        transform: scale(1.03);
-        filter: brightness(1.1);
-        animation: none;
-    }
-    /* Footer responsiveness */
-    .glass-footer {
-        position: relative;
-        bottom: 0;
-        width: 100%;
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        color: white;
+    .loader, .no-posts {
         text-align: center;
-        padding: 12px 20px;
-        font-size: 14px;
-        box-shadow: 0 -1px 10px rgba(0,0,0,0.2);
-        z-index: 10;
+        padding: 20px;
+        color: #666;
+        font-size: 12px;
     }
-    @media (max-width: 480px) {
-        .glass-footer {
-            font-size: 12px;
-            padding: 8px 6px;
+    .tab-pane {
+        display: none;
+    }
+    .tab-pane.active {
+        display: block;
+    }
+
+    .post-latest {
+        background: linear-gradient(to right, #fefefe, #f0f8ff);
+        border-left: 3px solid #007bff;
+        animation: fadeSlideIn 0.6s ease-out;
+        padding-left: 8px;
+        border-radius: 4px;
+    }
+
+    @keyframes fadeSlideIn {
+        from {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
         }
     }
 
-    /* Main layout responsiveness */
-    body, html {
-        min-height: 100vh;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-    }
-    main {
-        flex: 1;
-        width: 100%;
-    }
-    /* Utility for flex containers to stack vertically on mobile */
-    .flex-responsive {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-    }
-    @media (max-width: 768px) {
-        .flex-responsive {
-            flex-direction: column;
-            align-items: center;
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
         }
     }
-    </style>
-</head>
+`;
+document.head.appendChild(style);
 
-<body style="background: url(&quot;assets/img/head-bg.jpg&quot;) top / auto no-repeat, #0e121d;height: auto;">
-    <main style="height: auto;">
-        <div>
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">    
-            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-            <nav class="navbar glass-navbar navbar-expand-lg justify-content-center">
-                <div class="container text-center">
-                    <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarGlass">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse justify-content-center" id="navbarGlass">
-                        <ul class="navbar-nav d-flex justify-content-center flex-wrap gap-2">
-                            <li class="nav-item">
-                                <a class="nav-link text-white nav-glass-link" href="https://trutienmyth.net">
-                                    <i class="bi bi-house-door-fill me-2"></i>Trang chủ
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white nav-glass-link" href="https://news.trutienmyth.net">
-                                    <i class="bi bi-newspaper me-2"></i>Tin tức & sự kiện
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white nav-glass-link" href="https://facebook.com/groups/zxmyth">
-                                    <i class="bi bi-facebook me-2"></i>FB Group
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white nav-glass-link" href="https://discord.gg/P2a9NC6UpZ">
-                                    <i class="bi bi-discord me-2"></i>Discord
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white nav-glass-link" href="https://id.trutienmyth.net/index/register">
-                                    <i class="bi bi-pencil-square me-2"></i>Đăng ký
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white nav-glass-link" href="https://id.trutienmyth.net/index/login">
-                                    <i class="bi bi-box-arrow-in-right me-2"></i>Đăng nhập
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
-        <div class="flex-responsive" style="width:100%">
-            <div style="height: 130px; flex-shrink:0;">
-                <img class="swing animated responsive-logo" src="assets/img/logo.webp" alt="Tru Tiên Logo" loading="eager">
-            </div>
-            <div class="d-flex justify-content-end align-items-start" style="height: 350px;flex:1;">
-                <div style="background: rgba(0,0,0,0.13);width: 100%;max-width: 300px;height: 100%;border-radius: 18px;box-shadow: 0 2px 8px rgba(0,0,0,0.08);"></div>
-            </div>
-        </div>
-        <div class="container" style="max-width: 750px; margin-top: 15px;">
-            <ul class="nav nav-underline nav-justified" role="tablist" style="background: rgb(255,255,255);height: 50px;">
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link active" data-bs-toggle="tab" href="#tab-tintuc" style="font-size: 14px;">Tin tức</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link" data-bs-toggle="tab" href="#tab-sukien" style="font-size: 14px;">Sự kiện</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link" data-bs-toggle="tab" href="#tab-capnhat" style="font-size: 14px;">Cập nhật</a>
-                </li>
-            </ul>
-            <div class="tab-content">
-                <div id="tab-tintuc" class="tab-pane active" role="tabpanel">
-                    <div id="api-tintuc" class="tab-body">
-                        <div class="loader">Đang tải tin tức...</div>
-                    </div>
-                </div>
-                <div id="tab-sukien" class="tab-pane" role="tabpanel">
-                    <div id="api-sukien" class="tab-body">
-                        <div class="loader">Đang tải sự kiện...</div>
-                    </div>
-                </div>
-                <div id="tab-capnhat" class="tab-pane" role="tabpanel">
-                    <div id="api-capnhat" class="tab-body">
-                        <div class="loader">Đang tải cập nhật...</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="d-flex justify-content-end" style="margin-top: 30px;margin-bottom: 15px;">
-            <a class="btn btn-primary download-btn" role="button" href="download.html"></a>
-        </div>
-    </main>
-    <div class="bottom-100 d-inline">
-        <footer class="glass-footer">
-            <div class="footer-content">
-                &copy; 2025 Tru Tiên Classic. All rights reserved.
-            </div>
-        </footer>
-    </div>
-    <script>
-    // Blogger API config
-    const bloggerConfig = {
-        apiKey: 'AIzaSyDzZ2sBM101T0ani6qQj0h1b4k8B6dZ2bU',
-        blogId: '4545197129561134859',
-        maxPosts: 5,
-        labels: {
-            'tintuc': 'tintuc',
-            'sukien': 'sukien',
-            'capnhat': 'capnhat'
-        }
-    };
-
-    // Fetch posts
-    async function fetchBloggerPosts(label) {
-        try {
-            let url = `https://www.googleapis.com/blogger/v3/blogs/${bloggerConfig.blogId}/posts?key=${bloggerConfig.apiKey}&maxResults=${bloggerConfig.maxPosts}`;
-            if (label) url += `&labels=${encodeURIComponent(label)}`;
-            const response = await fetch(url);
-            const data = await response.json();
-            if (data.items?.length) {
-                return data.items.map(post => ({
-                    title: post.title,
-                    date: new Date(post.published).toLocaleDateString('vi-VN'),
-                    url: post.url
-                }));
-            }
-            return [];
-        } catch (err) {
-            console.error("Lỗi API Blogger:", err);
-            return [];
-        }
+// Hover & click tab
+function activateTab(tabLink) {
+    // Xóa active class từ tất cả nav-link trong tab này
+    const tabContainer = tabLink.closest('.nav');
+    if (tabContainer) {
+        tabContainer.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+    }
+    
+    // Xóa active class từ tất cả tab-pane
+    const tabContent = document.querySelector('.tab-content');
+    if (tabContent) {
+        tabContent.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
     }
 
-    // Hiển thị bài viết
-    function displayPosts(posts, containerId) {
-        const container = document.getElementById(`api-${containerId}`);
-        if (!container) return;
-        if (!posts.length) {
-            container.innerHTML = '<div class="no-posts">Không có bài viết nào</div>';
-            return;
-        }
-
-        container.innerHTML = posts.map((post, index) => `
-            <div class="post-item ${index === 0 ? 'post-latest' : ''}">
-                <a href="${post.url}" target="_blank" class="post-title">${index === 0 ? '🆕 ' : ''}${post.title}</a>
-                <div class="post-date">${post.date}</div>
-            </div>
-        `).join('');
-    }
-
-    // Load all tabs
-    async function loadAllBloggerContent() {
-        const tabs = bloggerConfig.labels;
-        for (const [tabId, label] of Object.entries(tabs)) {
-            const posts = await fetchBloggerPosts(label);
-            displayPosts(posts, tabId);
+    // Thêm active class cho nav-link hiện tại
+    tabLink.classList.add('active');
+    
+    // Tìm và kích hoạt tab-pane tương ứng
+    const targetHref = tabLink.getAttribute('href');
+    if (targetHref) {
+        const target = document.querySelector(targetHref);
+        if (target) {
+            target.classList.add('active');
         }
     }
+}
 
-    // Hover & click tab
-    function activateTab(tabLink) {
-        document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
-        document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+// Init
+document.addEventListener('DOMContentLoaded', () => {
+    loadAllBloggerContent();
 
-        tabLink.classList.add('active');
-        const target = document.querySelector(tabLink.getAttribute('href'));
-        if (target) target.classList.add('active');
-    }
-
-    // Init
-    document.addEventListener('DOMContentLoaded', () => {
-        loadAllBloggerContent();
-
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('mouseover', function () {
-                activateTab(this);
-            });
-            link.addEventListener('click', function (e) {
-                e.preventDefault();
-                activateTab(this);
-            });
+    // Chỉ áp dụng cho các tab-link trong tab-content, không phải navbar
+    const tabLinks = document.querySelectorAll('.nav[role="tablist"] .nav-link');
+    tabLinks.forEach(link => {
+        link.addEventListener('mouseover', function () {
+            activateTab(this);
+        });
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            activateTab(this);
         });
     });
-    </script>
+});
+</script>
+</div>
+        <div class="d-flex justify-content-end" style="transform: translateX(-130px) translateY(75px);height: auto;"><a class="btn btn-primary download-btn" role="button" href="download.html"></a>
+
+<style>
+.download-btn {
+    display: inline-block;
+    background: url('assets/img/download.png') no-repeat center center;
+    background-size: cover;
+    width: 295px;
+    height: 119px;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    animation: pulseBlink 1.5s infinite;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Responsive download button */
+@media (max-width: 1200px) {
+    .download-btn {
+        width: 265px;
+        height: 107px;
+    }
+}
+
+@media (max-width: 992px) {
+    .download-btn {
+        width: 235px;
+        height: 95px;
+    }
+}
+
+@media (max-width: 768px) {
+    .download-btn {
+        width: 205px;
+        height: 83px;
+    }
+}
+
+@media (max-width: 576px) {
+    .download-btn {
+        width: 175px;
+        height: 71px;
+    }
+}
+
+@media (max-width: 480px) {
+    .download-btn {
+        width: 145px;
+        height: 59px;
+    }
+}
+
+/* Hiệu ứng nhấp nháy */
+@keyframes pulseBlink {
+    0% { opacity: 1; }
+    50% { opacity: 0.85; }
+    100% { opacity: 1; }
+}
+
+/* Hover effect */
+.download-btn:hover {
+    transform: scale(1.03);
+    filter: brightness(1.1);
+    animation: none; /* Dừng nhấp nháy khi hover nếu muốn */
+}
+</style>
+</div>
+        <div class="bottom-100 d-inline" style="transform: translateY(0px);width: 100%;position: relative;overflow: auto;transform-origin: bottom;"><div>
+    <!-- Footer -->
+<footer class="glass-footer">
+    <div class="footer-content">
+        &copy; 2025 Tru Tiên Classic. All rights reserved.
+    </div>
+</footer>
+
+<style>
+/* Reset nếu cần */
+body {
+    margin: 0;
+    padding: 0;
+    padding-bottom: 60px; /* Thêm padding để tránh nội dung bị che bởi footer */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden; /* Tránh scroll ngang */
+}
+
+/* Responsive adjustments cho body */
+@media (max-width: 1200px) {
+    body {
+        padding-bottom: 55px;
+    }
+}
+
+@media (max-width: 992px) {
+    body {
+        padding-bottom: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-bottom: 45px;
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        padding-bottom: 40px;
+    }
+}
+
+/* Đảm bảo nội dung chính co giãn */
+main {
+    flex: 1;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Responsive scaling cho các container chính */
+@media (max-width: 1200px) {
+    main {
+        transform: scale(0.9);
+        transform-origin: top center;
+    }
+}
+
+@media (max-width: 992px) {
+    main {
+        transform: scale(0.8);
+        transform-origin: top center;
+    }
+}
+
+@media (max-width: 768px) {
+    main {
+        transform: scale(0.7);
+        transform-origin: top center;
+    }
+}
+
+@media (max-width: 576px) {
+    main {
+        transform: scale(0.6);
+        transform-origin: top center;
+    }
+}
+
+@media (max-width: 480px) {
+    main {
+        transform: scale(0.5);
+        transform-origin: top center;
+    }
+}
+
+/* Footer glass effect */
+.glass-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: white;
+    text-align: center;
+    padding: 12px 20px;
+    font-size: 14px;
+    box-shadow: 0 -1px 10px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+/* Responsive footer */
+@media (max-width: 768px) {
+    .glass-footer {
+        font-size: 12px;
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .glass-footer {
+        font-size: 11px;
+        padding: 8px 10px;
+    }
+}
+
+/* Optional: Content wrapper if needed */
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+</style>
+</div></div>
+    </main>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
 </body>
