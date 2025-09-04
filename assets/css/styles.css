@@ -1,41 +1,28 @@
-/* Font hiện đại */
-
-body, .navbar, .nav-link, .navbar-brand {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
+#spacer {
+  height: 200px;
 }
 
-/* Glass-style navbar */
-
-.glass-navbar {
-  background: rgba(0, 0, 0, 0.086);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  padding: 10px 20px;
+.btn {
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.3s ease;
 }
 
-/* Link mặc định */
+/* Hoặc Cách 2: border-bottom */
 
-.nav-glass-link {
-  padding: 10px 16px;
-  border-radius: 10px;
-  transition: all 0.3s ease-in-out;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.btn::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 3px;
+  background-color: currentColor;
+  bottom: 0;
+  left: 0;
+  transition: width 0.3s ease-out;
 }
 
-/* Hover xanh lá + hiệu ứng glass */
-
-.nav-glass-link:hover {
-  color: #fff;
-  transform: translateY(-2px);
-  text-shadow: 0 0 2dvb rgba(0, 247, 255, 0.637);
-}
-
-/* Icon */
-
-.nav-glass-link i {
-  font-size: 1.2rem;
+.btn:hover::after {
+  width: 100%;
 }
 
